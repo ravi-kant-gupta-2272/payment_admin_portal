@@ -190,6 +190,7 @@ function Dashboard() {
   const [selectedTenant, setSelectedTenant] = useState(null);
   // const [selectedTenantPlan, setSelectedTenantPlan] = useState(null);
   const [isTenantModalOpen, setIsTenantModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isAssignPlanModalOpen, setIsAssignPlanModalOpen] = useState(false);
   // const [isEditPlanModalOpen, setIsEditPlanModalOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState('Tenants');
@@ -355,7 +356,10 @@ function Dashboard() {
                       <tr>
                         <th className="px-4 py-4 text-left font-semibold text-sm tracking-wide">Client ID</th>
                         <th className="px-4 py-4 text-left font-semibold text-sm tracking-wide">Client Version</th>
+                        <th className="px-4 py-4 text-left font-semibold text-sm tracking-wide">Client Secret</th>
                         <th className="px-4 py-4 text-left font-semibold text-sm tracking-wide">Environment</th>
+                        <th className="px-4 py-4 text-left font-semibold text-sm tracking-wide">Webhook Username</th>
+                        <th className="px-4 py-4 text-left font-semibold text-sm tracking-wide">Webhook Password</th>
                         <th className="px-4 py-4 text-left font-semibold text-sm tracking-wide">Callback URL</th>
                         <th className="px-4 py-4 text-left font-semibold text-sm tracking-wide">Actions</th>
                       </tr>
@@ -686,6 +690,10 @@ function Dashboard() {
           <SideBar
             items={sidebarItems}
             onSelectItem={(item) => {
+              if (item.label === 'Logout'){
+                setIsLogoutModalOpen(true);
+                return;
+              }
               setActiveMenuItem(item.label);
             }}
             activeItem={activeMenuItem}
@@ -730,8 +738,8 @@ function Dashboard() {
       /> */}
 
       <LogoutModal
-        isOpen={activeMenuItem === 'Logout'}
-        onClose={() => setActiveMenuItem('Tenants')}
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
         onConfirm={handleLogout}
       />
     </div>

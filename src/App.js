@@ -81,7 +81,6 @@ function AppRoutes() {
   );
 }
 
-
 // Helper component to redirect root based on auth status
 const RootRedirect = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
