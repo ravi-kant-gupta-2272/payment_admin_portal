@@ -188,10 +188,10 @@ function Dashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedTenant, setSelectedTenant] = useState(null);
-  const [selectedTenantPlan, setSelectedTenantPlan] = useState(null);
+  // const [selectedTenantPlan, setSelectedTenantPlan] = useState(null);
   const [isTenantModalOpen, setIsTenantModalOpen] = useState(false);
   const [isAssignPlanModalOpen, setIsAssignPlanModalOpen] = useState(false);
-  const [isEditPlanModalOpen, setIsEditPlanModalOpen] = useState(false);
+  // const [isEditPlanModalOpen, setIsEditPlanModalOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState('Tenants');
 
   const sidebarItems = [
@@ -260,23 +260,21 @@ function Dashboard() {
   // Handle Edit Plan
   const handleEditPlan = (tenant, assignment, plan) => {
     setSelectedTenant(tenant);
-    setSelectedTenantPlan({ assignment, plan });
-    setIsEditPlanModalOpen(true);
+    // setSelectedTenantPlan({ assignment, plan });
+    // setIsEditPlanModalOpen(true);
   };
 
   // Save edited plan
-  const handleSaveEditPlan = (data) => {
-    // Update the plan details
-    dispatch(updatePlan({ id: data.planId, data: data.planData }));
+  // const handleSaveEditPlan = (data) => {
+  //   dispatch(updatePlan({ id: data.planId, data: data.planData }));
     
-    // Update the assignment details
-    dispatch(updateTenantPlan({ id: data.assignmentId, data: data.assignmentData }));
+  //   dispatch(updateTenantPlan({ id: data.assignmentId, data: data.assignmentData }));
     
-    setIsEditPlanModalOpen(false);
-    setSelectedTenant(null);
-    setSelectedTenantPlan(null);
-    alert('Plan updated successfully!');
-  };
+  //   setIsEditPlanModalOpen(false);
+  //   setSelectedTenant(null);
+  //   setSelectedTenantPlan(null);
+  //   alert('Plan updated successfully!');
+  // };
 
   // Handle Remove Plan
   const handleRemovePlan = (assignmentId, tenantName) => {
