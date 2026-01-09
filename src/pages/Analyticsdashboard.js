@@ -13,7 +13,7 @@ import {
 
 const AnalyticsDashboard = () => {
   const tenants = useSelector((state) => state.tenants.tenants);
-  const plans = useSelector((state) => state.plans.plans);
+  // const plans = useSelector((state) => state.plans.plans);
   const { subscriptions, payments } = useSelector((state) => state.tenantPlans);
   const [selectedTenant, setSelectedTenant] = useState('all');
 
