@@ -1,0 +1,33 @@
+/* .side-bar{
+  width: 15%;
+  height: 50vh;
+  color: #ffffff;
+  list-style-type: none;
+  background-color: #ffffff;
+  margin-right: 10px;
+}
+
+.side-bar > li{
+  height: 50px;
+  color: #000000;
+  border-bottom: 1px solid #000000;
+  text-align: space-around;
+  padding: 10px;
+}
+
+.side-bar > li:hover{
+  background-color: #f8fdfd;
+  cursor: pointer;
+  
+}
+
+.side-bar > li > span{
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+    .side-bar {
+        display: none;
+    }
+}
+ */
