@@ -12,7 +12,7 @@ import LogoutModal from '../components/LogoutModal';
 import AnalyticsDashboard from '../pages/Analyticsdashboard';
 import { useNavigate } from 'react-router-dom';
 import TenantPlansTable from '../components/TenantPlansTable';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Dashboard() {
   const dispatch = useDispatch();

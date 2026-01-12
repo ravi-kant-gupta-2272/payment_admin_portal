@@ -83,7 +83,7 @@ const TenantPlansTable = ({
                     };
 
                     const status = getStatus();
-                    const startDate = subscriptionData?.startDate || new Date().toISOString().split('T')[0];
+                    // const startDate = subscriptionData?.startDate || new Date().toISOString().split('T')[0];
 
                     return (
                       <tr key={tenant.id} className="border-b border-gray-200 hover:bg-gray-50">
