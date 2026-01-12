@@ -5,30 +5,59 @@ const initialState = {
     {
       id: '1',
       name: 'Basic Plan',
-      amount: 29.99,
-      frequency: 'monthly',
-      description: 'Perfect for small businesses',
-      features: ['Up to 10 users', 'Basic support', '5 GB storage'],
+      subscriptions: {
+        trial: { enabled: true, days: 14, amount: 0 },
+        monthly: { enabled: true, amount: 29.99 },
+        quarterly: { enabled: true, amount: 79.99 },
+        yearly: { enabled: true, amount: 299.99 },
+      },
+      description: 'Perfect for small teams getting started',
+      features: [
+        'Up to 10 users',
+        'Basic support',
+        '5 GB storage',
+        'Email notifications',
+      ],
       isActive: true,
       createdAt: '2024-01-15',
     },
     {
       id: '2',
-      name: 'Professional Plan',
-      amount: 79.99,
-      frequency: 'monthly',
-      description: 'For growing companies',
-      features: ['Up to 50 users', 'Priority support', '50 GB storage'],
+      name: 'Pro Plan',
+      subscriptions: {
+        trial: { enabled: true, days: 30, amount: 0 },
+        monthly: { enabled: true, amount: 79.99 },
+        quarterly: { enabled: true, amount: 219.99 },
+        yearly: { enabled: true, amount: 799.99 },
+      },
+      description: 'For growing businesses that need more',
+      features: [
+        'Up to 50 users',
+        'Priority support',
+        '50 GB storage',
+        'Advanced analytics',
+        'API access',
+      ],
       isActive: true,
       createdAt: '2024-01-15',
     },
     {
       id: '3',
       name: 'Enterprise Plan',
-      amount: 199.99,
-      frequency: 'monthly',
-      description: 'For large organizations',
-      features: ['Unlimited users', '24/7 support', 'Unlimited storage'],
+      subscriptions: {
+        trial: { enabled: true, days: 30, amount: 0 },
+        monthly: { enabled: true, amount: 199.99 },
+        quarterly: { enabled: true, amount: 549.99 },
+        yearly: { enabled: true, amount: 1999.99 },
+      },
+      description: 'For large organizations with advanced needs',
+      features: [
+        'Unlimited users',
+        '24/7 premium support',
+        'Unlimited storage',
+        'Advanced security',
+        'Dedicated account manager',
+      ],
       isActive: true,
       createdAt: '2024-01-15',
     },
@@ -52,7 +81,12 @@ const planSlice = createSlice({
       const { id, data } = action.payload;
       const index = state.plans.findIndex((plan) => plan.id === id);
       if (index !== -1) {
-        state.plans[index] = { ...state.plans[index], ...data };
+        state.plans[index] = {
+          ...state.plans[index],
+          ...data,
+          id: state.plans[index].id,
+          createdAt: state.plans[index].createdAt,
+        };
       }
     },
     deletePlan: (state, action) => {

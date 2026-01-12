@@ -1,137 +1,137 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChartLine,
-  faUsers,
-  faCheckCircle,
-  faTimesCircle,
-  faRedoAlt,
-  faMoneyBillWave,
-  faDownload,
-} from '@fortawesome/free-solid-svg-icons';
+// import React, { useState } from 'react';
+// import { useSelector } from 'react-redux';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import {
+//   faChartLine,
+//   faUsers,
+//   faCheckCircle,
+//   faTimesCircle,
+//   faRedoAlt,
+//   faMoneyBillWave,
+//   faDownload,
+// } from '@fortawesome/free-solid-svg-icons';
 
 const AnalyticsDashboard = () => {
-  const tenants = useSelector((state) => state.tenants.tenants);
+  // const tenants = useSelector((state) => state.tenants.tenants);
   // const plans = useSelector((state) => state.plans.plans);
-  const { subscriptions, payments } = useSelector((state) => state.tenantPlans);
-  const [selectedTenant, setSelectedTenant] = useState('all');
+  // const { subscriptions, payments } = useSelector((state) => state.tenantPlans);
+  // const [selectedTenant, setSelectedTenant] = useState('all');
 
   // Filter data based on selected tenant
-  const filteredSubscriptions =
-    selectedTenant === 'all'
-      ? subscriptions
-      : subscriptions.filter((s) => s.tenantId === selectedTenant);
+  // const filteredSubscriptions =
+  //   selectedTenant === 'all'
+  //     ? subscriptions
+  //     : subscriptions.filter((s) => s.tenantId === selectedTenant);
 
-  const filteredPayments =
-    selectedTenant === 'all'
-      ? payments
-      : payments.filter((p) => p.tenantId === selectedTenant);
+  // const filteredPayments =
+  //   selectedTenant === 'all'
+  //     ? payments
+  //     : payments.filter((p) => p.tenantId === selectedTenant);
 
   // Calculate metrics
-  const totalSubscriptions = filteredSubscriptions.length;
-  const activeSubscriptions = filteredSubscriptions.filter(
-    (s) => s.status === 'active'
-  ).length;
-  const trialSubscriptions = filteredSubscriptions.filter(
-    (s) => s.status === 'trial'
-  ).length;
-  const convertedFromTrial = filteredSubscriptions.filter(
-    (s) => s.convertedFromTrial
-  ).length;
-  const conversionRate =
-    trialSubscriptions > 0
-      ? ((convertedFromTrial / trialSubscriptions) * 100).toFixed(1)
-      : 0;
+  // const totalSubscriptions = filteredSubscriptions.length;
+  // const activeSubscriptions = filteredSubscriptions.filter(
+  //   (s) => s.status === 'active'
+  // ).length;
+  // const trialSubscriptions = filteredSubscriptions.filter(
+  //   (s) => s.status === 'trial'
+  // ).length;
+  // const convertedFromTrial = filteredSubscriptions.filter(
+  //   (s) => s.convertedFromTrial
+  // ).length;
+  // const conversionRate =
+  //   trialSubscriptions > 0
+  //     ? ((convertedFromTrial / trialSubscriptions) * 100).toFixed(1)
+  //     : 0;
 
-  const totalPayments = filteredPayments.length;
-  const successfulPayments = filteredPayments.filter((p) => p.status === 'success').length;
-  const failedPayments = filteredPayments.filter((p) => p.status === 'failed').length;
-  const refundedPayments = filteredPayments.filter((p) => p.status === 'refunded').length;
-  const successRate =
-    totalPayments > 0 ? ((successfulPayments / totalPayments) * 100).toFixed(1) : 0;
-  const failureRate =
-    totalPayments > 0 ? ((failedPayments / totalPayments) * 100).toFixed(1) : 0;
+  // const totalPayments = filteredPayments.length;
+  // const successfulPayments = filteredPayments.filter((p) => p.status === 'success').length;
+  // const failedPayments = filteredPayments.filter((p) => p.status === 'failed').length;
+  // const refundedPayments = filteredPayments.filter((p) => p.status === 'refunded').length;
+  // const successRate =
+  //   totalPayments > 0 ? ((successfulPayments / totalPayments) * 100).toFixed(1) : 0;
+  // const failureRate =
+  //   totalPayments > 0 ? ((failedPayments / totalPayments) * 100).toFixed(1) : 0;
 
-  const totalRetries = filteredPayments.reduce((sum, p) => sum + (p.retries || 0), 0);
-  const avgRetries = totalPayments > 0 ? (totalRetries / totalPayments).toFixed(1) : 0;
+  // const totalRetries = filteredPayments.reduce((sum, p) => sum + (p.retries || 0), 0);
+  // const avgRetries = totalPayments > 0 ? (totalRetries / totalPayments).toFixed(1) : 0;
 
   // Revenue calculations
-  const totalRevenue = filteredPayments
-    .filter((p) => p.status === 'success')
-    .reduce((sum, p) => sum + p.amount, 0);
+  // const totalRevenue = filteredPayments
+  //   .filter((p) => p.status === 'success')
+  //   .reduce((sum, p) => sum + p.amount, 0);
 
-  const refundedAmount = filteredPayments
-    .filter((p) => p.status === 'refunded')
-    .reduce((sum, p) => sum + p.amount, 0);
+  // const refundedAmount = filteredPayments
+  //   .filter((p) => p.status === 'refunded')
+  //   .reduce((sum, p) => sum + p.amount, 0);
 
-  const netRevenue = totalRevenue - refundedAmount;
+  // const netRevenue = totalRevenue - refundedAmount;
 
   // Monthly recurring revenue (MRR)
-  const mrr = filteredSubscriptions
-    .filter((s) => s.status === 'active' && s.frequency === 'monthly')
-    .reduce((sum, s) => sum + s.amount, 0);
+  // const mrr = filteredSubscriptions
+  //   .filter((s) => s.status === 'active' && s.frequency === 'monthly')
+  //   .reduce((sum, s) => sum + s.amount, 0);
 
   // Recent payments for table
-  const recentPayments = [...filteredPayments]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 10);
+  // const recentPayments = [...filteredPayments]
+  //   .sort((a, b) => new Date(b.date) - new Date(a.date))
+  //   .slice(0, 10);
 
   // Export data function
-  const handleExportData = () => {
-    const data = {
-      metrics: {
-        totalSubscriptions,
-        activeSubscriptions,
-        trialSubscriptions,
-        conversionRate: `${conversionRate}%`,
-        totalPayments,
-        successfulPayments,
-        failedPayments,
-        refundedPayments,
-        successRate: `${successRate}%`,
-        failureRate: `${failureRate}%`,
-        totalRetries,
-        avgRetries,
-        totalRevenue: `$${totalRevenue.toFixed(2)}`,
-        refundedAmount: `$${refundedAmount.toFixed(2)}`,
-        netRevenue: `$${netRevenue.toFixed(2)}`,
-        mrr: `$${mrr.toFixed(2)}`,
-      },
-      subscriptions: filteredSubscriptions,
-      payments: filteredPayments,
-    };
+  // const handleExportData = () => {
+  //   const data = {
+  //     metrics: {
+  //       totalSubscriptions,
+  //       activeSubscriptions,
+  //       trialSubscriptions,
+  //       conversionRate: `${conversionRate}%`,
+  //       totalPayments,
+  //       successfulPayments,
+  //       failedPayments,
+  //       refundedPayments,
+  //       successRate: `${successRate}%`,
+  //       failureRate: `${failureRate}%`,
+  //       totalRetries,
+  //       avgRetries,
+  //       totalRevenue: `$${totalRevenue.toFixed(2)}`,
+  //       refundedAmount: `$${refundedAmount.toFixed(2)}`,
+  //       netRevenue: `$${netRevenue.toFixed(2)}`,
+  //       mrr: `$${mrr.toFixed(2)}`,
+  //     },
+  //     subscriptions: filteredSubscriptions,
+  //     payments: filteredPayments,
+  //   };
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `analytics-${selectedTenant}-${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
+  //   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement('a');
+  //   a.href = url;
+  //   a.download = `analytics-${selectedTenant}-${new Date().toISOString().split('T')[0]}.json`;
+  //   document.body.appendChild(a);
+  //   a.click();
+  //   document.body.removeChild(a);
+  //   URL.revokeObjectURL(url);
+  // };
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-4">
         <div>
           <h2 className="text-[#1a3a52] text-3xl font-semibold mb-2">Analytics Dashboard</h2>
-          <p className="text-gray-600">Monitor subscriptions, payments, and revenue metrics</p>
+          {/* <p className="text-gray-600">Monitor subscriptions, payments, and revenue metrics</p> */}
         </div>
-        <button
+        {/* <button
           onClick={handleExportData}
           className="bg-[#1a3a52] hover:bg-[#2a4a62] text-white px-6 py-3 rounded font-medium transition-all duration-300 shadow-md hover:shadow-lg flex items-center gap-2"
         >
           <FontAwesomeIcon icon={faDownload} />
           Export Data
-        </button>
+        </button> */}
       </div>
 
       {/* Tenant Filter */}
-      <div className="bg-white rounded-lg shadow-md p-4">
+      {/* <div className="bg-white rounded-lg shadow-md p-4">
         <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Tenant</label>
         <select
           value={selectedTenant}
@@ -145,11 +145,10 @@ const AnalyticsDashboard = () => {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Active Subscriptions */}
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-2">
             <FontAwesomeIcon icon={faUsers} className="text-3xl text-blue-600" />
@@ -161,7 +160,6 @@ const AnalyticsDashboard = () => {
           </div>
         </div>
 
-        {/* Conversion Rate */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-2">
             <FontAwesomeIcon icon={faChartLine} className="text-3xl text-green-600" />
@@ -173,7 +171,6 @@ const AnalyticsDashboard = () => {
           </div>
         </div>
 
-        {/* Payment Success Rate */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-2">
             <FontAwesomeIcon icon={faCheckCircle} className="text-3xl text-green-600" />
@@ -185,7 +182,6 @@ const AnalyticsDashboard = () => {
           </div>
         </div>
 
-        {/* Failed Payments */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-2">
             <FontAwesomeIcon icon={faTimesCircle} className="text-3xl text-red-600" />
@@ -196,10 +192,10 @@ const AnalyticsDashboard = () => {
             {failedPayments} failed, {totalRetries} retries
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Revenue Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-2">
             <FontAwesomeIcon icon={faMoneyBillWave} className="text-2xl text-green-600" />
@@ -233,10 +229,10 @@ const AnalyticsDashboard = () => {
           <div className="text-2xl font-bold text-[#1a3a52]">${mrr.toFixed(2)}</div>
           <div className="text-sm text-gray-600 mt-1">Monthly Recurring</div>
         </div>
-      </div>
+      </div> */}
 
       {/* Recent Payments Table */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      {/* <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-[#1a3a52]">Recent Payments</h3>
         </div>
@@ -304,7 +300,7 @@ const AnalyticsDashboard = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
